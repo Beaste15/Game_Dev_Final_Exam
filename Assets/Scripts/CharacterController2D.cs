@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -13,16 +14,17 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 velocity = Vector3.zero;
+	public Animator animator;
 
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
-
 	private void FixedUpdate()
 	{
 		m_Grounded = false;
+		animator.SetBool("Jumping", true);
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -30,7 +32,8 @@ public class CharacterController2D : MonoBehaviour
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
-				m_Grounded = true;
+				m_Grounded = true; 
+				animator.SetBool("Jumping", false);
 		}
 	}
 
@@ -64,6 +67,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
+			animator.SetBool("Jumping", true);
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
 	}
