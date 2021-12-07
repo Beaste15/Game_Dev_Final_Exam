@@ -17,9 +17,8 @@ public class DeathZone : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.layer == LayerMask.NameToLayer("DeathZone"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
             Death.Play();
+            SceneManager.LoadScene("GameLost");
         }
     }
 
