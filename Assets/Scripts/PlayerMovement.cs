@@ -37,4 +37,12 @@ public class PlayerMovement : MonoBehaviour
 		controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
 		jump = false;
 	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.layer == LayerMask.NameToLayer("Secret"))
+		{
+			Speed = 70f;
+		}
+	}
 }

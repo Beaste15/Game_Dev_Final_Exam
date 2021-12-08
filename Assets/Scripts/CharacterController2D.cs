@@ -44,6 +44,14 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Player") || other.gameObject.layer == LayerMask.NameToLayer("Secret"))
+		{
+			m_JumpForce = 2000f;
+		}
+	}
+
 
 	public void Move(float move, bool jump)
 	{
